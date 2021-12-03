@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-cosmo-app-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-cosmo-app
+  template:
+    metadata:
+      labels:
+        app: node-cosmo-app
+    spec:
+      containers:
+        - name: node-cosmo-app
+          image: smdockercontainerreg.azurecr.io/sm_registry/node-cosmo-app:latest
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-cosmo-app-svc
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 31002
+  selector:
+    app: node-cosmo-app
+  
