@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "smk8scluster-6dd1"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "smk8scluster-6dd1"
+  template:
+    metadata:
+      labels:
+        app: "smk8scluster-6dd1"
+    spec:
+      containers:
+        - name: "smk8scluster-6dd1"
+          image: "smdockercontainerreg.azurecr.io/smk8scluster"
+          ports:
+          - containerPort: 3000
